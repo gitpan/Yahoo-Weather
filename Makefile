@@ -58,11 +58,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = Yahoo::Weather
 NAME_SYM = Yahoo_Weather
-VERSION = 0.01
+VERSION = 0.02
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_01
+VERSION_SYM = 0_02
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.01
+XS_VERSION = 0.02
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -186,9 +186,12 @@ PERL_ARCHIVE       =
 PERL_ARCHIVE_AFTER = 
 
 
-TO_INST_PM = lib/Yahoo/Weather.pm
+TO_INST_PM = lib/Yahoo/123.pl \
+	lib/Yahoo/Weather.pm
 
-PM_TO_BLIB = lib/Yahoo/Weather.pm \
+PM_TO_BLIB = lib/Yahoo/123.pl \
+	blib/lib/Yahoo/123.pl \
+	lib/Yahoo/Weather.pm \
 	blib/lib/Yahoo/Weather.pm
 
 
@@ -258,7 +261,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Yahoo-Weather
-DISTVNAME = Yahoo-Weather-0.01
+DISTVNAME = Yahoo-Weather-0.02
 
 
 # --- MakeMaker macro section:
@@ -481,7 +484,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) Generating META.yml
 	$(NOECHO) $(ECHO) '--- #YAML:1.0' > META_new.yml
 	$(NOECHO) $(ECHO) 'name:               Yahoo-Weather' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version:            0.01' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version:            0.02' >> META_new.yml
 	$(NOECHO) $(ECHO) 'abstract:           Perl extension to Find Current Observation WEATHER  and Two Day Forecast for  a given Location or ZIP CODE.' >> META_new.yml
 	$(NOECHO) $(ECHO) 'author:' >> META_new.yml
 	$(NOECHO) $(ECHO) '    - Krishna Chaitanya Averineni <kchaitan@apple.com>' >> META_new.yml
@@ -790,7 +793,7 @@ testdb_static :: testdb_dynamic
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd :
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0.01">' > $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0.02">' > $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <ABSTRACT>Perl extension to Find Current Observation WEATHER  and Two Day Forecast for  a given Location or ZIP CODE.</ABSTRACT>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <AUTHOR>Krishna Chaitanya Averineni &lt;kchaitan@apple.com&gt;</AUTHOR>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
@@ -804,6 +807,7 @@ ppd :
 
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
+	  lib/Yahoo/123.pl blib/lib/Yahoo/123.pl \
 	  lib/Yahoo/Weather.pm blib/lib/Yahoo/Weather.pm 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
