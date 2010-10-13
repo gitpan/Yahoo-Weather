@@ -28,7 +28,7 @@ our @EXPORT = qw(
 	
 );
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use constant YAHOOWAPI => 'http://weather.yahooapis.com/forecastrss?';
 use constant YAHOOYDN => 'http://query.yahooapis.com/v1/public/yql?q=';
