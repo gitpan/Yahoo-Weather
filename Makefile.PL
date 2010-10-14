@@ -5,7 +5,10 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME              => 'Yahoo::Weather',
     VERSION_FROM      => 'lib/Yahoo/Weather.pm', # finds $VERSION
-    PREREQ_PM         => {}, # e.g., Module::Name => 1.1
+    PREREQ_PM         => {    'LWP::Simple' => '5.835',
+			    'Test::More' => '0.86',
+ 			   'XML::Simple' => '2.14',
+	}, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Yahoo/Weather.pm', # retrieve abstract from module
        AUTHOR         => 'Krishna Chaitanya Averineni <kchaitan@apple.com>') : ()),
@@ -24,17 +27,7 @@ if  (eval {require ExtUtils::Constant; 1}) {
   ExtUtils::Constant::WriteConstants(
                                      NAME         => 'Yahoo::Weather',
                                      NAMES        => \@names,
-                                     DEFAULT_TYPE => 'IV',
-                                     C_FILE       => 'const-c.inc',
-                                     XS_FILE      => 'const-xs.inc',
                                   );
 
 }
-else {
-  use File::Copy;
-  use File::Spec;
-  foreach my $file ('const-c.inc', 'const-xs.inc') {
-    my $fallback = File::Spec->catfile('fallback', $file);
-    copy ($fallback, $file) or die "Can't copy $fallback to $file: $!";
-  }
-}
+

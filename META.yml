@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Yahoo-Weather
-version:            0.03
+version:            0.04
 abstract:           Perl extension to Find Current Observation WEATHER  and Two Day Forecast for  a given Location or ZIP CODE.
 author:
     - Krishna Chaitanya Averineni <kchaitan@apple.com>
@@ -10,7 +10,10 @@ configure_requires:
     ExtUtils::MakeMaker:  0
 build_requires:
     ExtUtils::MakeMaker:  0
-requires:  {}
+requires:
+    LWP::Simple:  5.835
+    Test::More:   0.86
+    XML::Simple:  2.14
 no_index:
     directory:
         - t

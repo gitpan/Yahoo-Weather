@@ -28,7 +28,7 @@ our @EXPORT = qw(
 	
 );
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 use constant YAHOOWAPI => 'http://weather.yahooapis.com/forecastrss?';
 use constant YAHOOYDN => 'http://query.yahooapis.com/v1/public/yql?q=';
@@ -226,8 +226,9 @@ __END__
 =head1 NAME
 
 Yahoo::Weather - Perl extension to Find Current Observation WEATHER  and Two Day Forecast for  a given Location or ZIP CODE.
-
+		
 		- This module also gives you the sugestions based on Location Name or Zip, it gives you GEOGRAPHICAL DETAILS.
+
 =head1 SYNOPSIS
 
   use Yahoo::Weather;
@@ -266,14 +267,20 @@ Get Weather Details Based on Zip Code
 
   $obj->getWeatherByLocation($zip,F);
 
-Default is Cel and for FARENHEIT only pass 'f' or 'F' as last parameter or else it defaults to Celsius.
+Default is Cel and if you need it in FARENHEIT only pass 'f' or 'F' as last parameter(second parameter) or else it defaults to Celsius.
+
+getWeatherByLocation function needs either ZIPCODE or PLACENAME as mandate. Second Parameter is Optional. In none specified it defaults to CENTIGRADE.
 
 Get GEOGRAPHICAL Sugestions based Zip Code or Place Name
 
   $obj->getSugestions($zip);
   $obj->getSugestions($loc);
 
-In above mentioned methods gives you a HASHREF as return value unless some thing goes wrong.
+Above 2 functions gives you GEO Details based on either ZIP or PLACE NAME.
+
+getSugestions function takes only one ARG.
+
+ALL above mentioned methods gives you a HASHREF as return value unless some thing goes wrong.
 
 In case of exceptions, we get following
 
@@ -297,19 +304,21 @@ None by default.
 
 =head1 SEE ALSO
 
-LWP::Simple http://search.cpan.org/~gaas/libwww-perl-5.837/lib/LWP/Simple.pm
+LWP::Simple (http://search.cpan.org/~gaas/libwww-perl-5.837/lib/LWP/Simple.pm)
 
-XML::Simple http://search.cpan.org/~grantm/XML-Simple-2.18/lib/XML/Simple.pm
+XML::Simple (http://search.cpan.org/~grantm/XML-Simple-2.18/lib/XML/Simple.pm)
 
 Please Go through YDN(http://developer.yahoo.com)  as it is built using it.
 
-If you cant Find Weather for Particular Location , Please refer to http::/weather.yahoo.com
+If you can't Find Weather for Particular Location , Please refer to http::/weather.yahoo.com
 
-Feed Provider is Weather.com
+Weather Data Provider is Weather.com 
+
+Weather Data Processor is YAHOO.com
 
 This module needs to be extended further like getting temp of Today only and Forecast of NexDay only etc...When I have time I will defnetly extend it.
 
-Please Note That curently if you give incorrect place name it will not give you weather Details or if that particular location is available in our 4.5 million locations it will end up giving those details. 
+Please Note that curently if you give incorrect place name, this module will not give you weather Details or if that particular location(incorrect) is available in YAHOO'S 4.5 million locations it will end up giving those details. 
 
 Also this module can't be used more than 1000 times an Hour, As it was the restriction from YDN. 
 
